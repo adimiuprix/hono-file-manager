@@ -18,6 +18,16 @@ app.get('/', async (c) => {
   return c.html(html)
 })
 
+app.get('/styles.css', async (c) => {
+  const css = await fs.promises.readFile(path.join(__dirname, 'styles.css'), 'utf8')
+  return c.text(css, 200, { 'Content-Type': 'text/css' })
+})
+
+app.get('/script.js', async (c) => {
+  const js = await fs.promises.readFile(path.join(__dirname, 'script.js'), 'utf8')
+  return c.text(js, 200, { 'Content-Type': 'application/javascript' })
+})
+
 // API: list files
 app.get('/api/list', async (c) => {
   const query = c.req.query()
